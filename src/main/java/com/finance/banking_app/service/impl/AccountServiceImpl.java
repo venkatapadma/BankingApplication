@@ -1,5 +1,10 @@
 package com.finance.banking_app.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.finance.banking_app.dto.AccountDto;
 import com.finance.banking_app.entity.Account;
 import com.finance.banking_app.exception.AccountNotFoundException;
@@ -7,15 +12,11 @@ import com.finance.banking_app.exception.InsufficientBalanceException;
 import com.finance.banking_app.mapper.AccountMapper;
 import com.finance.banking_app.repository.AccountRepository;
 import com.finance.banking_app.service.AccountService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
