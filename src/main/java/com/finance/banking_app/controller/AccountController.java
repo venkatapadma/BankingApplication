@@ -14,6 +14,7 @@ import java.util.Map;
 public class AccountController {
 
     private final AccountService accountService;
+
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
@@ -52,14 +53,14 @@ public class AccountController {
 
     //Get All Account REST API
     @GetMapping
-    public ResponseEntity<List<AccountDto>> getAllAccountsByUserId(Long userId) {
+    public ResponseEntity<List<AccountDto>> getAllAccounts() {
         List<AccountDto> accounts = accountService.getAllAccounts();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
     //Delete Account REST API
     @DeleteMapping("/{id}")
-    public  ResponseEntity<String> deleteAccount(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
         accountService.deleteAccountById(id);
         return new ResponseEntity<>("Account is deleted successfully!", HttpStatus.OK);
     }

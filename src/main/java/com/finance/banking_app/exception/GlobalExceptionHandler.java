@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     //handle specific exception - AccountNotFoundException
     @ExceptionHandler(AccountNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleAccountNotFoundException(AccountNotFoundException exception,
-                                                               WebRequest webRequest) {
+                                                                       WebRequest webRequest) {
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 exception.getMessage(),
                 webRequest.getDescription(false),
