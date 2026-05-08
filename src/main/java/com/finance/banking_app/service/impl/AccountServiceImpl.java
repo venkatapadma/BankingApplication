@@ -1,10 +1,5 @@
 package com.finance.banking_app.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.finance.banking_app.dto.AccountDto;
 import com.finance.banking_app.entity.Account;
 import com.finance.banking_app.exception.AccountNotFoundException;
@@ -12,6 +7,10 @@ import com.finance.banking_app.exception.InsufficientBalanceException;
 import com.finance.banking_app.mapper.AccountMapper;
 import com.finance.banking_app.repository.AccountRepository;
 import com.finance.banking_app.service.AccountService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -31,14 +30,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto getAccountById(Long Id) {
-        Account account = accountRepository.findById(Id).orElseThrow(()->new AccountNotFoundException("Account does not exist"));
+        Account account = accountRepository.findById(Id).orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
         return AccountMapper.mapToAccountDto(account);
     }
 
     @Override
     public AccountDto deposit(Long id, Double amount) {
 
-        Account account = accountRepository.findById(id).orElseThrow(()->new AccountNotFoundException("Account does not exist"));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
         Double total = account.getBalance() + amount;
         account.setBalance(total);
         Account savedAccount = accountRepository.save(account);
@@ -48,9 +47,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto withdraw(Long id, Double amount) {
 
-        Account account = accountRepository.findById(id).orElseThrow(()->new AccountNotFoundException("Account does not exist"));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
 
-        if(account.getBalance() < amount){
+        if (account.getBalance() < amount) {
             throw new InsufficientBalanceException("Insufficient amount");
         }
 

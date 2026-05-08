@@ -6,11 +6,10 @@ import com.finance.banking_app.entity.Account;
 public class AccountMapper {
 
     public static Account mapToAccount(AccountDto accountDto) {
-        return new Account(
-                accountDto.id(),
-                accountDto.accountHolderName(),
-                accountDto.balance()
-        );
+        Account account = new Account();
+        account.setAccountHolderName(accountDto.accountHolderName());
+        account.setBalance(accountDto.balance());
+        return account;
     }
 
     public static AccountDto mapToAccountDto(Account account) {
