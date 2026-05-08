@@ -1,12 +1,13 @@
 package com.finance.banking_app.service;
 
 import com.finance.banking_app.dto.AccountDto;
+import com.finance.banking_app.dto.AccountRequestDto;
 
 import java.util.List;
 
 public interface AccountService {
 
-    AccountDto createAccount(AccountDto account);
+    AccountDto createAccount(AccountRequestDto account);
 
     AccountDto getAccountById(Long Id);
 

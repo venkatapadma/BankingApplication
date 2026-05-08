@@ -1,6 +1,7 @@
 package com.finance.banking_app.service.impl;
 
 import com.finance.banking_app.dto.AccountDto;
+import com.finance.banking_app.dto.AccountRequestDto;
 import com.finance.banking_app.entity.Account;
 import com.finance.banking_app.exception.AccountNotFoundException;
 import com.finance.banking_app.exception.InsufficientBalanceException;
@@ -22,8 +23,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto createAccount(AccountDto accountDto) {
-        Account newAccount = AccountMapper.mapToAccount(accountDto);
+    public AccountDto createAccount(AccountRequestDto requestDto) {
+        Account newAccount = AccountMapper.mapToAccount(requestDto);
         Account savedAccount = accountRepository.save(newAccount);
         return AccountMapper.mapToAccountDto(savedAccount);
     }

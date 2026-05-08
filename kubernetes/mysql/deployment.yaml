@@ -1,0 +1,44 @@
+# Configure 'Deployment' of mysql server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    tier: database
+spec:
+  replicas: 1
+  selector:           # mysql Pod should contain same labels
+    matchLabels:
+      app: mysql
+      tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: mysql
+      labels:          # Must match 'Service' and 'Deployment' selectors
+        app: mysql
+        tier: database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8        # image from docker-hub
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE  # Setting Database Name from a 'ConfigMap'
+              value: banking_db
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+          volumeMounts:             # Mounting volume obtained from Persistent Volume Claim
+            - mountPath: /var/lib/mysql # This is the path in the container on which the mounting will take place
+              name: mysql-persistent-storage
+
+      volumes:
+        - name: mysql-persistent-storage  # Obtaining 'volume' from PVC
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim

@@ -1,14 +1,15 @@
 package com.finance.banking_app.mapper;
 
 import com.finance.banking_app.dto.AccountDto;
+import com.finance.banking_app.dto.AccountRequestDto;
 import com.finance.banking_app.entity.Account;
 
 public class AccountMapper {
 
-    public static Account mapToAccount(AccountDto accountDto) {
+    public static Account mapToAccount(AccountRequestDto requestDto) {
         Account account = new Account();
-        account.setAccountHolderName(accountDto.accountHolderName());
-        account.setBalance(accountDto.balance());
+        account.setAccountHolderName(requestDto.accountHolderName());
+        account.setBalance(requestDto.balance());
         return account;
     }
 

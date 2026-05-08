@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-app
+  labels:
+    app: banking-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: banking-app
+  template:
+    metadata:
+      name: banking-app
+      labels:
+        app: banking-app
+    spec:
+      containers:
+        - name: banking-app
+          image: venkatapadma26/banking-application:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:      # Setting Environment Variables
+            - name: DB_HOST
+              value: mysql
+            - name: DB_NAME
+              value: banking_db
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: root
+      

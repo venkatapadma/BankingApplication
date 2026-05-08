@@ -1,6 +1,7 @@
 package com.finance.banking_app.controller;
 
 import com.finance.banking_app.dto.AccountDto;
+import com.finance.banking_app.dto.AccountRequestDto;
 import com.finance.banking_app.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class AccountController {
 
     //Add Account REST API
     @PostMapping
-    public ResponseEntity<AccountDto> addAccounts(@RequestBody AccountDto accountDto) {
-        return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
+    public ResponseEntity<AccountDto> addAccounts(@RequestBody AccountRequestDto request) {
+        return new ResponseEntity<>(accountService.createAccount(request), HttpStatus.CREATED);
     }
 
     //Get Account REST API
