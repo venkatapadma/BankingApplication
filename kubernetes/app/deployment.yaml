@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: banking-app
+  namespace: banking
   labels:
     app: banking-app
 spec:
@@ -17,7 +18,7 @@ spec:
     spec:
       containers:
         - name: banking-app
-          image: venkatapadma26/banking-application:v1
+          image: venkatapadma26/banking-application:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -30,4 +31,19 @@ spec:
               value: root
             - name: DB_PASSWORD
               value: root
-      
+
+          livenessProbe:
+            tcpSocket:
+              port: 2181
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          readinessProbe:
+            tcpSocket:
+              port: 2181
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 2

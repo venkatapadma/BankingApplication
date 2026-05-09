@@ -36,8 +36,22 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: venkatapadma26/banking-application
-        tags: v1
+        tags: latest, ${{ github.sha }}
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Set up kubectl
+      run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" | 
+        base64 --decode > kubeconfig
+        export KUBECONFIG=$PWD/kubeconfig
+        kubectl version --client
+
+    - name: Deploy to kubernetes
+      run: |
+        kubectl apply -f kubernetes/
+        kubectl apply -f kubernetes/app -n banking
+        kubectl apply -f kubernetes/mysql -n banking
+        kubectl rollout status deployment/banking-app -n banking

@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: banking
   labels:
     app: mysql
     tier: database
@@ -38,6 +39,21 @@ spec:
             - mountPath: /var/lib/mysql # This is the path in the container on which the mounting will take place
               name: mysql-persistent-storage
 
+          livenessProbe:
+            tcpSocket:
+              port: 2181
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          readinessProbe:
+            tcpSocket:
+              port: 2181
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 2
       volumes:
         - name: mysql-persistent-storage  # Obtaining 'volume' from PVC
           persistentVolumeClaim:
