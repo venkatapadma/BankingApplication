@@ -15,7 +15,15 @@ Spring Data JPA (Hibernate),
 MySQL Database,
 Maven,
 REST APIs,
-JUnit.
+JUnit,
+CI/CD,
+Docker,
+Kubernetes,
+Swagger,
+Open API documentation,
+Prometheus,
+Grafana,
+OpenTelemtry
 
 📌 Features
 
