@@ -42,16 +42,16 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Set up kubectl
-      run: |
-        echo "${{ secrets.KUBE_CONFIG_DATA }}" | 
-        base64 --decode > kubeconfig
-        export KUBECONFIG=$PWD/kubeconfig
-        kubectl config get-contexts
-
-    - name: Deploy to kubernetes
-      run: |
-        kubectl apply -f kubernetes/ --validate=false
-        kubectl apply -f kubernetes/app -n banking --validate=false
-        kubectl apply -f kubernetes/mysql -n banking --validate=false
-        kubectl rollout status deployment/banking-app -n banking
+#    - name: Set up kubectl
+#      run: |
+#        echo "${{ secrets.KUBE_CONFIG_DATA }}" |
+#        base64 --decode > kubeconfig
+#        export KUBECONFIG=$PWD/kubeconfig
+#        kubectl config get-contexts
+#
+#    - name: Deploy to kubernetes
+#      run: |
+#        kubectl apply -f kubernetes/ --validate=false
+#        kubectl apply -f kubernetes/app -n banking --validate=false
+#        kubectl apply -f kubernetes/mysql -n banking --validate=false
+#        kubectl rollout status deployment/banking-app -n banking
