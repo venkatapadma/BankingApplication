@@ -18,7 +18,7 @@ spec:
       containers:
         - name: banking-app
           image: venkatapadma26/banking-application:v1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:      # Setting Environment Variables
