@@ -47,11 +47,11 @@ jobs:
         echo "${{ secrets.KUBE_CONFIG_DATA }}" | 
         base64 --decode > kubeconfig
         export KUBECONFIG=$PWD/kubeconfig
-        kubectl version --client
+        kubectl config get-contexts
 
     - name: Deploy to kubernetes
       run: |
-        kubectl apply -f kubernetes/
-        kubectl apply -f kubernetes/app -n banking
-        kubectl apply -f kubernetes/mysql -n banking
+        kubectl apply -f kubernetes/namespace.yml --validate=false
+        kubectl apply -f kubernetes/app -n banking --validate=false
+        kubectl apply -f kubernetes/mysql -n banking --validate=false
         kubectl rollout status deployment/banking-app -n banking
