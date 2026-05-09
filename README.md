@@ -5,6 +5,7 @@ following SOLID principles and clean architecture best practices.
 
 This application exposes RESTful APIs to manage bank accounts and transactions such as create account, deposit,
 withdraw, view accounts, delete account, with global exception handling using @ControllerAdvice.
+<img width="950" height="1001" alt="image" src="https://github.com/user-attachments/assets/bb4933cd-2f9c-4497-b6d3-88b519bf05c1" />
 
 🚀 Tech Stack
 
@@ -54,101 +55,88 @@ SOLID principles applied
 Clean separation of concerns
 Transaction management with Spring
 
-🧱 Application Architecture
-controller
+📘 API Documentation (Swagger / OpenAPI)
+The application includes Swagger/OpenAPI documentation using Springdoc OpenAPI, providing interactive and self‑describing REST APIs.
 
-└── AccountController
+Automatically generates OpenAPI 3.0 specification from controller annotations
+Interactive Swagger UI for testing APIs without external tools
+Improves developer onboarding and API discoverability
 
-service
+Access Swagger UI
+http://localhost:8080/swagger-ui.html
 
-├── AccountService
+Access OpenAPI Specification
+http://localhost:8080/v3/api-docs
 
-└── impl
 
-repository
+🐳 Docker Support
+The application is fully containerized using Docker to ensure consistent execution across development, CI, and production environments.
+Docker Capabilities
 
-└── AccountRepository
+Lightweight production-ready Docker image
+Externalized configuration via environment variables
+Supports local development and cloud deployments
+Compatible with CI/CD and Kubernetes workflows
 
-entity
+Run Using Docker Compose
+Shelldocker compose up -dShow more lines
+This starts:
 
-└── Account
+Banking Application
+MySQL database
+with correct networking and environment configuration.
 
-exception
 
-├── AccountNotFoundException
+🚀 CI/CD Pipeline
+The project includes a CI/CD pipeline to automate build and delivery processes.
+CI/CD Highlights
 
-├── InsufficientBalanceException
+Implemented using GitHub Actions
+Automated steps:
 
-└── GlobalExceptionHandler (@ControllerAdvice)
+Code checkout
+Build and test with Maven
+Docker image creation
+Push image to container registry
 
-dto
 
-└── AccountDto
+Ensures every change is validated before release
 
-mapper
+Benefits
 
-└── AccountMapper
+Faster feedback cycles
+Reduced manual errors
+Repeatable and reliable deployments
 
-🔑 Core APIs
 
-➕ Create Account
-POST /api/accounts
+☸️ Kubernetes Support
 
-💰 Deposit Amount
-PUT /api/accounts/{id}/deposit
+The application is Kubernetes‑ready and supports cloud‑native deployment patterns.
+Kubernetes Features
 
-💸 Withdraw Amount
-PUT /api/accounts/{id}/withdraw
+Kubernetes Deployment for application pods
+Service abstraction for internal/external access
+Horizontal scaling via replicas
+Health checks powered by Spring Boot Actuator
+Rolling updates with zero downtime
 
-📄 Get Account by ID
-GET /api/accounts/{id}
+Kubernetes Readiness
 
-📋 Get All Accounts
-GET /api/accounts
+Designed for container orchestration
+Environment‑driven configuration
+Compatible with Ingress controllers and service meshes
 
-❌ Delete Account
-DELETE /api/accounts/{id}
-
-⚠️ Exception Handling (Controller Advice)
-All exceptions are handled centrally using @ControllerAdvice.
-Examples:
-
-AccountNotFoundException → 404 NOT FOUND
-
-InsufficientBalanceException → 400 BAD REQUEST
-
-Generic Exception → 500 INTERNAL SERVER ERROR
-
-This ensures:
-✅ Clean controllers
-✅ Consistent error responses
-✅ Better maintainability
-
-🧠 SOLID Principles Applied
-
-S – Single Responsibility
-Each class has one responsibility (Controller, Service, Repository).
-
-O – Open/Closed
-Business logic can be extended without modifying existing code.
-
-L – Liskov Substitution
-Interfaces and implementations follow contract rules.
-
-I – Interface Segregation
-Clean service interfaces without unnecessary methods.
-
-D – Dependency Inversion
-Services depend on abstractions, not implementations.
 
 ▶️ How to Run the Application
 
 Clone the repository
-git
-clone [https://github.com/your-username/BankingApplication.git](https://github.com/venkatapadma/BankingApplication.git)
+
+git clone https://github.com/venkatapadma/BankingApplication.git
 
 Create MySQL database:
-SQLCREATE DATABASE banking_db;
+SQL
+
+CREATE DATABASE banking_db;
 
 Update application.properties
 Run the application:
@@ -164,7 +152,3 @@ Authentication & Authorization (Spring Security, JWT)
 Transaction history
 
 Pagination & sorting
-
-Swagger / OpenAPI documentation
-
-Docker support
