@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:8
+    image: mysql:latest
     environment:
       MYSQL_DATABASE: banking_db
       MYSQL_ROOT_PASSWORD: root
@@ -15,3 +15,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
       - mysql
+
+  grafana-lgtm:
+    image: 'grafana/otel-lgtm:latest'
+    ports:
+      - '3000:3000'
+      - '4318:4318'
+      - '4317:4317'

@@ -3,6 +3,8 @@ package com.finance.banking_app.controller;
 import com.finance.banking_app.dto.AccountDto;
 import com.finance.banking_app.dto.AccountRequestDto;
 import com.finance.banking_app.service.AccountService;
+import io.micrometer.observation.annotation.Observed;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/accounts")
+@Slf4j
 public class AccountController {
 
     private final AccountService accountService;
@@ -21,8 +24,10 @@ public class AccountController {
     }
 
     //Add Account REST API
+    @Observed(name = "account.count")
     @PostMapping
     public ResponseEntity<AccountDto> addAccounts(@RequestBody AccountRequestDto request) {
+        log.info("Creating account request");
         return new ResponseEntity<>(accountService.createAccount(request), HttpStatus.CREATED);
     }
 
