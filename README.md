@@ -3,9 +3,12 @@
 A full‑stack backend banking application built using Spring Boot 4, Spring Data JPA (Hibernate), MySQL, and Java 25,
 following SOLID principles and clean architecture best practices.
 
-This application exposes RESTful APIs to manage bank accounts and transactions such as create account, deposit,
-withdraw, view accounts, delete account, with global exception handling using @ControllerAdvice.
+This application exposes RESTful APIs to manage bank accounts and transactions such as create account, deposit,withdraw, 
+view accounts, delete account, with global exception handling using @ControllerAdvice.
 <img width="950" height="1001" alt="image" src="https://github.com/user-attachments/assets/bb4933cd-2f9c-4497-b6d3-88b519bf05c1" />
+
+spring security and oauth2
+<img width="900" height="471" alt="Screenshot 2026-05-13 at 23 07 01" src="https://github.com/user-attachments/assets/13a8b5c3-08de-413a-aaef-1a37ec2c33c1" />
 
 prometheus
 <img width="1776" height="1059" alt="Screenshot 2026-05-11 at 11 14 51" src="https://github.com/user-attachments/assets/dd16c118-c2f9-4288-8af1-abb25f740818" />
@@ -20,12 +23,10 @@ opentelemetry log tracing
 <img width="1788" height="1064" alt="Screenshot 2026-05-11 at 15 43 53" src="https://github.com/user-attachments/assets/fc1cbc11-237b-42c6-935a-2b873683b886" />
 
 
-
-
-
 🚀 Tech Stack
 
 Java 25,
+spring security(JWT and oauth2)
 Spring Boot 4.x,
 Spring Data JPA (Hibernate),
 MySQL Database,
@@ -170,8 +171,6 @@ mvn spring-boot:runShow more lines
 Access APIs via Postman or browser
 
 ✅ Future Enhancements
-
-Authentication & Authorization (Spring Security, JWT)
 
 Transaction history
 
